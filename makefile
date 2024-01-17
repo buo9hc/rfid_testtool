@@ -6,6 +6,6 @@ OBJ = GetComm.o
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-handleSerial: $(OBJ)
+rfid-testtool: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 	rm -f $(OBJ)

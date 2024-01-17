@@ -10,7 +10,7 @@
 
 
 /* Open port*/
-extern int serial_port;
+int serial_port;
 int check_port(){
     serial_port = open("/dev/ttyUSB0", O_RDWR);
     if (serial_port < 0) {
@@ -69,4 +69,29 @@ unsigned char calculateXORChecksum(const unsigned char *data, int length) {
     }
 
     return checksum;
+}
+/* Write data to serial*/
+void write_data(unsigned char *dataframe, int size, int port) {
+    unsigned char xorChecksum = calculateXORChecksum(dataframe, size);
+    dataframe[size-1] = xorChecksum;
+
+    /* Show hex data that sent to serial*/
+    printf("Hex message sent: ");
+    for (int i = 0; i < size; i++) {
+        printf("0x%02X  ", *(dataframe + i));
+    }
+    // printf("XOR Checksum: 0x%02X\n", xorChecksum);
+
+    write(port, dataframe, size);
+}
+
+/* Print suggestion*/
+void print_suggestion() {
+    printf("Please select options...\n\r \
+    -R: Reset all configuration of the module to factory default setting.\n\r \
+    -L: Set all LED ON. \n\r \
+    -l: Set all LED OFF. \n\r \
+    -A: Turn Automatic Detecting Card mode ON\n\r \
+    -a: Turn Automatic Detecting Card mode OFF \n\r \
+    -r: Read data from RFID card\n");
 }
