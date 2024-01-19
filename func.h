@@ -14,6 +14,7 @@ int serial_port;
 int check_port(){
     serial_port = open("/dev/ttyUSB0", O_RDWR);
     if (serial_port < 0) {
+        printf("Have no port conected!!!\n");
         printf("error %i from open: %s\n", errno, strerror(errno));
         return 1;
     }
@@ -93,5 +94,6 @@ void print_suggestion() {
     -l: Set all LED OFF. \n\r \
     -A: Turn Automatic Detecting Card mode ON\n\r \
     -a: Turn Automatic Detecting Card mode OFF \n\r \
-    -r: Read data from RFID card\n");
+    -r: Read data from RFID card\n\r \
+    -h: Sent custom hex (rfid-testtool -h <Hex code>)\n");
 }

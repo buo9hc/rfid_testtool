@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
         print_suggestion();
         return 1;
     }
-    else if (argc > 2)
+    else if (argc > 2 && strcmp(argv[1],"-h")!=0)
     {
         printf("Too many argument...\n\r");
         return 1;
@@ -41,6 +41,18 @@ int main(int argc, char *argv[])
     else if (strcmp(argv[1],"-r")==0)
     {
         write_data(Read_data,sizeof(Read_data)/sizeof(Read_data[0]),serial_port);
+    }
+    else if (strcmp(argv[1],"-h")==0)
+    {
+        if (argc <= 2) {
+            printf("Please enter yor hex\n");
+            printf("rfid-testtool -h <Hex code>\n");
+            return 1;
+        }
+        for (int i = 2; i<argc;i++){
+            Manual_hex[i-2] = strtol(argv[i],NULL,16);
+        }
+        write_data(Manual_hex,argc-1,serial_port);
     }
     else if (strcmp(argv[1],"--help")==0)
     {
