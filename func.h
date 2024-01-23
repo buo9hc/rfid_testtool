@@ -73,8 +73,8 @@ unsigned char calculateXORChecksum(const unsigned char *data, int length) {
 }
 /* Write data to serial*/
 void write_data(unsigned char *dataframe, int size, int port) {
-    unsigned char xorChecksum = calculateXORChecksum(dataframe, size);
-    dataframe[size-1] = xorChecksum;
+    // unsigned char xorChecksum = calculateXORChecksum(dataframe, size);
+    // dataframe[size-1] = xorChecksum;
 
     /* Show hex data that sent to serial*/
     printf("Hex message sent: ");

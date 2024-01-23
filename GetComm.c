@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
         for (int i = 2; i<argc;i++){
             Manual_hex[i-2] = strtol(argv[i],NULL,16);
         }
-        write_data(Manual_hex,argc-1,serial_port);
+        write_data(Manual_hex,argc-2,serial_port);
     }
     else if (strcmp(argv[1],"--help")==0)
     {
